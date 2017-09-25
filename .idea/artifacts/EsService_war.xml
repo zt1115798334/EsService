@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EsService:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="EsService.war">
+      <element id="artifact" artifact-name="EsService:war exploded" />
+    </root>
+  </artifact>
+</component>
