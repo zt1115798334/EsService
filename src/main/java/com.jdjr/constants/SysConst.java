@@ -18,8 +18,8 @@ public class SysConst {
 
     public enum QueryType {
 
-        FUZZYQUERY("Fuzzy", "模糊查询"),
-        EXACTQUERY("Exact", "精确查询");
+        FUZZYQUERY("fuzzy", "模糊查询"),
+        EXACTQUERY("exact", "精确查询");
 
         private String code;
         private String name;

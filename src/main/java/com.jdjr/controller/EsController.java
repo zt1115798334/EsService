@@ -1,29 +1,28 @@
 package com.jdjr.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jdjr.base.controller.BaseController;
+import com.jdjr.beans.AjaxResult;
 import com.jdjr.constants.SysConst;
 import com.jdjr.es.entity.EsEnterpriseInfo;
 import com.jdjr.es.service.EsEnterpriseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("es")
-public class EsController {
+public class EsController extends BaseController {
 
     @Autowired
     private EsEnterpriseInfoService esEnterpriseInfoService;
 
     @RequestMapping(value = "esEnterprise", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject findEsEnterprise(@RequestParam("keyword") String keyword, @RequestParam("type") String type) {
+    public AjaxResult findEsEnterprise(@RequestParam("keyword") String keyword, @RequestParam("type") String type) {
         JSONObject result = new JSONObject();
+        System.out.println("type = " + type);
         /**
          * 精确查询
          */
@@ -38,6 +37,6 @@ public class EsController {
             List<EsEnterpriseInfo> es = esEnterpriseInfoService.findByenterpriseAbbrLike(keyword);
             result.put("result", es);
         }
-        return result;
+        return success(result);
     }
 }
