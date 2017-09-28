@@ -6,6 +6,8 @@ import com.jdjr.beans.AjaxResult;
 import com.jdjr.constants.SysConst;
 import com.jdjr.es.entity.EsEnterpriseInfo;
 import com.jdjr.es.service.EsEnterpriseInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @RequestMapping("es")
 public class EsController extends BaseController {
 
+    protected final Logger logger = LoggerFactory.getLogger(EsController.class);
+
     @Autowired
     private EsEnterpriseInfoService esEnterpriseInfoService;
 
@@ -23,6 +27,7 @@ public class EsController extends BaseController {
     public AjaxResult findEsEnterprise(@RequestParam("keyword") String keyword, @RequestParam("type") String type) {
         JSONObject result = new JSONObject();
         System.out.println("type = " + type);
+        logger.info("type:{}", type);
         /**
          * 精确查询
          */
