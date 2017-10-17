@@ -6,6 +6,7 @@ import com.jdjr.beans.AjaxResult;
 import com.jdjr.constants.SysConst;
 import com.jdjr.es.entity.EsEnterpriseInfo;
 import com.jdjr.es.service.EsEnterpriseInfoService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,11 @@ public class EsController extends BaseController {
     public AjaxResult findEsEnterprise(@RequestParam("keyword") String keyword, @RequestParam("type") String type) {
         logger.info("参数信息：关键字：{}，类型:{}", keyword, type);
         JSONObject result = new JSONObject();
-        try{
+        if (StringUtils.isEmpty(keyword) ||
+                StringUtils.isEmpty(type)) {
+            return fail("参数不合法");
+        }
+        try {
             /**
              * 精确查询
              */
