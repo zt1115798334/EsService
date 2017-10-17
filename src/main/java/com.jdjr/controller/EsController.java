@@ -25,22 +25,26 @@ public class EsController extends BaseController {
     @RequestMapping(value = "esEnterprise", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResult findEsEnterprise(@RequestParam("keyword") String keyword, @RequestParam("type") String type) {
+        logger.info("参数信息：关键字：{}，类型:{}", keyword, type);
         JSONObject result = new JSONObject();
-        System.out.println("type = " + type);
-        logger.info("type:{}", type);
-        /**
-         * 精确查询
-         */
-        if (SysConst.QueryType.EXACTQUERY.getCode().equals(type)) {
-            List<EsEnterpriseInfo> es = esEnterpriseInfoService.findByNameC(keyword);
-            result.put("result", es);
-        }
-        /**
-         * 模糊查询
-         */
-        if (SysConst.QueryType.FUZZYQUERY.getCode().equals(type)) {
-            List<EsEnterpriseInfo> es = esEnterpriseInfoService.findByenterpriseAbbrLike(keyword);
-            result.put("result", es);
+        try{
+            /**
+             * 精确查询
+             */
+            if (SysConst.QueryType.EXACTQUERY.getCode().equals(type)) {
+                List<EsEnterpriseInfo> es = esEnterpriseInfoService.findByNameC(keyword);
+                result.put("result", es);
+            }
+            /**
+             * 模糊查询
+             */
+            if (SysConst.QueryType.FUZZYQUERY.getCode().equals(type)) {
+                List<EsEnterpriseInfo> es = esEnterpriseInfoService.findByenterpriseAbbrLike(keyword);
+                result.put("result", es);
+            }
+        } catch(Exception e) {
+            logger.error("查询ES服务，异常信息为:{}", e);
+            return fail("操作失败");
         }
         return success(result);
     }

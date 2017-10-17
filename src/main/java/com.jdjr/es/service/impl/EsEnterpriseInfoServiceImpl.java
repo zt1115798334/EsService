@@ -43,14 +43,14 @@ public class EsEnterpriseInfoServiceImpl implements EsEnterpriseInfoService {
         WildcardQueryBuilder wildcard = QueryBuilders.wildcardQuery("name_c", "*" + enterpriseName + "*");
         TermQueryBuilder termQuery = QueryBuilders.termQuery("name_c", enterpriseName);
         MatchQueryBuilder matchQuery = QueryBuilders.matchQuery("name_c", enterpriseName);
-        return esEnterpriseInfoDao.findEsEnterpriseInfoByQuery(SysConst.INDEX, SysConst.ENTERPRISEINFO, matchQuery);
+        return esEnterpriseInfoDao.findEsEnterpriseInfoByQuery(SysConst.INDEX, SysConst.ENTERPRISE_INFO, matchQuery);
 //        return esEnterpriseInfoRepository.findByName_cLike(enterpriseName);
     }
 
     @Override
     public List<EsEnterpriseInfo> findByNameC(String name_c) {
         MatchQueryBuilder matchQuery = QueryBuilders.matchPhraseQuery("name_c", name_c);
-        List<EsEnterpriseInfo> list = esEnterpriseInfoDao.findEsEnterpriseInfoByQuery(SysConst.INDEX, SysConst.ENTERPRISEINFO, matchQuery);
+        List<EsEnterpriseInfo> list = esEnterpriseInfoDao.findEsEnterpriseInfoByQuery(SysConst.INDEX, SysConst.ENTERPRISE_INFO, matchQuery);
         return list;
     }
 }

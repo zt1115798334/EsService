@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
-@Document(indexName = SysConst.INDEX, type = SysConst.ENTERPRISEINFO)
+@Document(indexName = SysConst.INDEX, type = SysConst.ENTERPRISE_INFO)
 public class EsEnterpriseInfo implements Serializable {
 
     private static final long serialVersionUID = 9201034849892179274L;
