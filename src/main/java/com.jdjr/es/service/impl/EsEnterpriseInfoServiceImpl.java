@@ -1,5 +1,6 @@
 package com.jdjr.es.service.impl;
 
+import com.google.common.base.Objects;
 import com.jdjr.constants.SysConst;
 import com.jdjr.es.dao.EsEnterpriseInfoDao;
 import com.jdjr.es.entity.EsEnterpriseInfo;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EsEnterpriseInfoServiceImpl implements EsEnterpriseInfoService {
@@ -49,8 +51,11 @@ public class EsEnterpriseInfoServiceImpl implements EsEnterpriseInfoService {
 
     @Override
     public List<EsEnterpriseInfo> findByNameC(String name_c) {
-        MatchQueryBuilder matchQuery = QueryBuilders.matchPhraseQuery("name_c", name_c);
+        MatchQueryBuilder matchQuery = QueryBuilders.matchPhraseQuery("name_c", "\"" + name_c + "\"");
         List<EsEnterpriseInfo> list = esEnterpriseInfoDao.findEsEnterpriseInfoByQuery(SysConst.INDEX, SysConst.ENTERPRISE_INFO, matchQuery);
-        return list;
+        List<EsEnterpriseInfo> result = list.stream()
+                .filter(esEnterpriseInfo -> Objects.equal(esEnterpriseInfo.getName_c(),name_c))
+                .collect(Collectors.toList());
+        return result;
     }
 }

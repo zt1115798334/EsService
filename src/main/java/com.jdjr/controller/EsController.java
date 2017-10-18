@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("es")
+@RequestMapping("/es")
 public class EsController extends BaseController {
 
     protected final Logger logger = LoggerFactory.getLogger(EsController.class);
@@ -23,7 +23,13 @@ public class EsController extends BaseController {
     @Autowired
     private EsEnterpriseInfoService esEnterpriseInfoService;
 
-    @RequestMapping(value = "esEnterprise", method = RequestMethod.POST)
+    @RequestMapping("/test")
+    @ResponseBody
+    public Object test() {
+        return "hello,word!";
+    }
+
+    @RequestMapping(value = "/esEnterprise", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResult findEsEnterprise(@RequestParam("keyword") String keyword, @RequestParam("type") String type) {
         logger.info("参数信息：关键字：{}，类型:{}", keyword, type);
