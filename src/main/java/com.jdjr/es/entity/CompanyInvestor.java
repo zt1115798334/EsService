@@ -10,8 +10,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
-@Document(indexName = SysConst.INDEX, type = SysConst.ENTERPRISE_INFO)
-public class EsEnterpriseInfo implements Serializable {
+@Document(indexName = SysConst.COMPANY_INVESTOR_INDEX, type = SysConst.COMPANY_INVESTOR_TYPE)
+public class CompanyInvestor implements Serializable {
 
     private static final long serialVersionUID = 9201034849892179274L;
 
@@ -38,10 +38,10 @@ public class EsEnterpriseInfo implements Serializable {
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String, store = true)
     private String del_flag; //"新增ADD 修改EDIT，删除DEL
 
-    public EsEnterpriseInfo() {
+    public CompanyInvestor() {
     }
 
-    public EsEnterpriseInfo(String name_c, String property1, Integer investor_type, String name, String del_flag) {
+    public CompanyInvestor(String name_c, String property1, Integer investor_type, String name, String del_flag) {
         this.name_c = name_c;
         this.property1 = property1;
         this.investor_type = investor_type;

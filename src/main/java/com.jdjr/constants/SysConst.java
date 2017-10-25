@@ -1,8 +1,11 @@
 package com.jdjr.constants;
 
 public class SysConst {
-    public static final String INDEX = "jdjr";
-    public static final String ENTERPRISE_INFO = "enterprise_info";
+    public static final String COMPANY_INVESTOR_INDEX = "dmt_risk_ic_company_investor_i_d";
+    public static final String COMPANY_INVESTOR_TYPE = "dmt_risk_ic_company_investor_i_d";
+
+    public static final String COMPANY_BASE_INDEX = "dmt_risk_ic_company_base_i_d";
+    public static final String COMPANY_BASE_TYPE = "dmt_risk_ic_company_base_i_d";
 
     public enum QueryType {
 
